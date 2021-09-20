@@ -27,36 +27,36 @@ const moviesSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: (v) => isURL(v, {
-        protocols: ['http','https','ftp'],
+        protocols: ['http', 'https', 'ftp'],
         require_tld: true,
-        require_protocol: true
+        require_protocol: true,
       }),
       message: 'Введите URL-адрес',
-    }
+    },
   },
   trailer: {
     type: String,
     required: true,
     validate: {
       validator: (v) => isURL(v, {
-        protocols: ['http','https','ftp'],
+        protocols: ['http', 'https', 'ftp'],
         require_tld: true,
-        require_protocol: true
+        require_protocol: true,
       }),
       message: 'Введите URL-адрес',
-    }
+    },
   },
   thumbnail: {
     type: String,
     required: true,
     validate: {
       validator: (v) => isURL(v, {
-        protocols: ['http','https','ftp'],
+        protocols: ['http', 'https', 'ftp'],
         require_tld: true,
-        require_protocol: true
+        require_protocol: true,
       }),
       message: 'Введите URL-адрес',
-    }
+    },
   },
   owner: {
     ref: 'user',
@@ -77,4 +77,4 @@ const moviesSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('user', moviesSchema);
+module.exports = mongoose.model('movie', moviesSchema);

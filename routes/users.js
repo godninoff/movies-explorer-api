@@ -1,11 +1,12 @@
 const router = require('express').Router();
+const { celebrateUpdateUser } = require('../middlewares/celebrate');
 
 const {
   getUserInfo,
-  updateUsers,
+  updateUser,
 } = require('../controllers/users');
 
 router.get('/users/me', getUserInfo);
-router.patch('/users/me', updateUsers);
+router.patch('/users/me', celebrateUpdateUser, updateUser);
 
 module.exports = router;
