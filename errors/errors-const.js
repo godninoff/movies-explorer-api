@@ -5,4 +5,6 @@ module.exports = {
   NOT_FOUND: 'Пользователь не найден',
   MOVIE_NOT_FOUND: 'Не найден фильм с указанным ID',
   MOVIE_REMOVE_ERROR: 'Нельзя удалять фильмы других пользователей',
+  AUTHORIZATION_REQUIRED: 'Необходима авторизация',
+  ROUTER_NOT_FOUND: 'Запрашиваемый ресурс не найден.',
 };

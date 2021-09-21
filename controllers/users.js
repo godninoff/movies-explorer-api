@@ -6,8 +6,7 @@ const BadRequest = require('../errors/BadRequest');
 const Conflict = require('../errors/Conflict');
 const NotFound = require('../errors/NotFound');
 const Unauthorized = require('../errors/Unauthorized');
-
-const { NODE_ENV, JWT_SECRET } = process.env;
+const { JWT_SECRET } = require('../utils/constants');
 
 module.exports.createUser = (req, res, next) => {
   const {
@@ -28,7 +27,7 @@ module.exports.createUser = (req, res, next) => {
             email,
             password: hash,
           })
-            .then((user) => res.status(200).send({ data: user }))
+            .then((user) => res.send({ data: user }))
             .catch((err) => {
               if (err.name === 'ValidationError') {
                 next(new BadRequest(systemMessage.BAD_REQUEST));
@@ -50,7 +49,7 @@ module.exports.login = (req, res, next) => {
   return User.findUserByCredentials(email, password)
     .then((user) => {
       const token = jwt.sign({ _id: user._id },
-        NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+        JWT_SECRET,
         { expiresIn: '7d' });
       res
         .cookie('jwt', token, {
@@ -74,7 +73,7 @@ module.exports.getUserInfo = (req, res, next) => {
       if (!user) {
         throw new NotFound(systemMessage.NOT_FOUND);
       } else {
-        res.status(200).send({ data: user });
+        res.send({ data: user });
       }
     })
     .catch((err) => {
@@ -100,7 +99,7 @@ module.exports.updateUser = (req, res, next) => {
       if (!user) {
         throw new NotFound(systemMessage.NOT_FOUND);
       } else {
-        res.status(200).send({ data: user });
+        res.send({ data: user });
       }
     })
     .catch((err) => {

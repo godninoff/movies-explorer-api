@@ -9,12 +9,12 @@ const { limiter } = require('./middlewares/rate-limit');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const errorHandler = require('./errors/ErrorHandler');
 const router = require('./routes/index');
-const NotFound = require('./errors/NotFound');
+const { MONGO_URL, PORT } = require('./utils/constants');
 
-const { PORT = 3000 } = process.env;
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/bitfilmsdb', {
+mongoose.connect(MONGO_URL,
+  {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -41,10 +41,6 @@ app.use(
 
 app.use(limiter);
 app.use(router);
-
-app.use('*', (req, res, next) => {
-  next(new NotFound('Запрашиваемый ресурс не найден.'));
-});
 
 app.use(errorLogger);
 app.use(errors());

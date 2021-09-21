@@ -6,7 +6,7 @@ const NotFound = require('../errors/NotFound');
 
 module.exports.getMoviesInfo = (req, res, next) => {
   Movie.find({})
-    .then((movies) => res.status(200).send({ data: movies }))
+    .then((movies) => res.send({ data: movies }))
     .catch(next);
 };
 
@@ -40,7 +40,7 @@ module.exports.createMovie = (req, res, next) => {
     movieId,
     owner,
   })
-    .then((movie) => res.status(200).send({ data: movie }))
+    .then((movie) => res.send({ data: movie }))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new BadRequest(systemMessage.BAD_REQUEST));
