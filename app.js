@@ -15,9 +15,9 @@ const app = express();
 
 mongoose.connect(MONGO_URL,
   {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
 
 app.use(helmet());
 app.use(express.json());
