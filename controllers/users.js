@@ -27,7 +27,7 @@ module.exports.createUser = (req, res, next) => {
             email,
             password: hash,
           })
-            .then((user) => res.send({ data: user }))
+            .then((user) => res.send(user))
             .catch((err) => {
               if (err.name === 'ValidationError') {
                 next(new BadRequest(systemMessage.BAD_REQUEST));
@@ -73,7 +73,7 @@ module.exports.getUserInfo = (req, res, next) => {
       if (!user) {
         throw new NotFound(systemMessage.NOT_FOUND);
       } else {
-        res.send({ data: user });
+        res.send(user);
       }
     })
     .catch((err) => {
@@ -82,7 +82,8 @@ module.exports.getUserInfo = (req, res, next) => {
       } else {
         next(err);
       }
-    });
+    })
+    .catch(next);
 };
 
 module.exports.updateUser = (req, res, next) => {
@@ -99,7 +100,7 @@ module.exports.updateUser = (req, res, next) => {
       if (!user) {
         throw new NotFound(systemMessage.NOT_FOUND);
       } else {
-        res.send({ data: user });
+        res.send(user);
       }
     })
     .catch((err) => {
@@ -107,8 +108,11 @@ module.exports.updateUser = (req, res, next) => {
         throw new BadRequest(systemMessage.NOT_FOUND);
       } else if (err.name === 'ValidationError') {
         throw new BadRequest(systemMessage.BAD_REQUEST);
+      } else if (err.name === 'MongoServerError' && err.code === 11000) {
+        throw new Conflict(systemMessage.DOUBLE_EMAIL);
       } else {
         next(err);
       }
-    });
+    })
+    .catch(next);
 };

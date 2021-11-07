@@ -33,7 +33,7 @@ function toJSON() {
 
 usersSchema.methods.toJSON = toJSON;
 
-usersSchema.statics.findUserByCredentials = function (email, password, next) {
+usersSchema.statics.findUserByCredentials = function findUser(email, password, next) {
   return this.findOne({ email })
     .select('+password')
     .then((user) => {
