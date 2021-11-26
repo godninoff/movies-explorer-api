@@ -8,6 +8,7 @@ module.exports.getMoviesInfo = (req, res, next) => {
   Movie.find({})
     .then((movies) => res.send({ data: movies }))
     .catch(next);
+  // return res.sendStatus(500)
 };
 
 module.exports.createMovie = (req, res, next) => {
@@ -51,7 +52,7 @@ module.exports.createMovie = (req, res, next) => {
 };
 
 module.exports.deleteMovieById = (req, res, next) => {
-  Movie.findById(req.params.movieId)
+  Movie.findOne(req.params.id)
     .then((movie) => {
       if (!movie) {
         throw new NotFound(systemMessage.MOVIE_NOT_FOUND);

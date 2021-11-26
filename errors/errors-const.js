@@ -7,4 +7,5 @@ module.exports = {
   MOVIE_REMOVE_ERROR: 'Нельзя удалять фильмы других пользователей',
   AUTHORIZATION_REQUIRED: 'Необходима авторизация',
   ROUTER_NOT_FOUND: 'Запрашиваемый ресурс не найден.',
+  SERVER_ERROR_MESSAGE: 'На сервере произошла ошибка',
 };
