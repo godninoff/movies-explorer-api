@@ -5,8 +5,9 @@ const Forbidden = require('../errors/Forbidden');
 const NotFound = require('../errors/NotFound');
 
 module.exports.getMoviesInfo = (req, res, next) => {
-  Movie.find({})
-    .then((movies) => res.send({ data: movies }))
+  const owner = req.user._id;
+  Movie.find({ owner })
+    .then((movies) => res.send(movies))
     .catch(next);
   // return res.sendStatus(500)
 };
@@ -41,7 +42,7 @@ module.exports.createMovie = (req, res, next) => {
     movieId,
     owner,
   })
-    .then((movie) => res.send({ data: movie }))
+    .then((movie) => res.send(movie))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new BadRequest(systemMessage.BAD_REQUEST));
@@ -61,7 +62,8 @@ module.exports.deleteMovieById = (req, res, next) => {
         next(new Forbidden(systemMessage.MOVIE_REMOVE_ERROR));
         return;
       }
-      movie.deleteOne()
+      movie
+        .deleteOne()
         .then((deletedMovie) => res.send(deletedMovie))
         .catch(next);
     })

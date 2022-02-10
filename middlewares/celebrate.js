@@ -49,7 +49,7 @@ const celebrateCreateMovie = celebrate({
 
 const celebrateDeleteMovie = celebrate({
   params: Joi.object().keys({
-    movieId: Joi.number().required(),
+    movieId: Joi.string().required(),
   }),
 });
 
