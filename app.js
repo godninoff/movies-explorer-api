@@ -28,11 +28,8 @@ app.use(cookieParser());
 app.use(
   cors({
     origin: [
-      'https://ya-diploma-backend.nomoredomains.club',
-      'https://ya-diploma-movies.nomoredomains.club',
-      'http://localhost:3000',
+      'https://savedmovies-yandex.herokuapp.com/',
       'http://localhost:3001',
-      'http://localhost:3002',
       'http://httpstat.us/500',
     ],
     methods: ['GET', 'PUT', 'POST', 'DELETE', 'PATCH'],
