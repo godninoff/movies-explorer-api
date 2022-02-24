@@ -28,7 +28,9 @@ app.use(cookieParser());
 app.use(
   cors({
     origin: [
-      'https://savedmovies-yandex.herokuapp.com/',
+      'https://savedmovies-yandex.herokuapp.com',
+      'https://backend-savedmovies-yandex.herokuapp.com',
+      'http://localhost:3000',
       'http://localhost:3001',
       'http://httpstat.us/500',
     ],
