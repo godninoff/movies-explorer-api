@@ -2,7 +2,7 @@ const {
   NODE_ENV,
   JWT_SECRET,
   MONGO_URL = 'mongodb://localhost:27017/bitfilmsdb',
-  PORT = 3000,
+  PORT = process.env.PORT || 3000,
 } = process.env;
 
 module.exports = {
