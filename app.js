@@ -29,7 +29,7 @@ app.use(
   cors({
     origin: [
       'https://savedmovies-yandex.herokuapp.com',
-      'https://ya-diploma-movies.nomoredomains.club/',
+      'https://ya-diploma-movies.nomoredomains.club',
       'https://backend-savedmovies-yandex.herokuapp.com',
       'http://localhost:3000',
       'http://localhost:3001',
