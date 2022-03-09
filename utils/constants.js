@@ -1,7 +1,7 @@
 const {
   NODE_ENV,
   JWT_SECRET,
-  MONGO_URL = 'mongodb+srv://godninoff:214972Ag@cluster0.oo43b.mongodb.net/savedMovies',
+  MONGO_URL,
   // 'mongodb://localhost:27017/bitfilmsdb'
   PORT = process.env.PORT || 3000,
 } = process.env;
